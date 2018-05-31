@@ -1,0 +1,5 @@
+/adeel/adeel/workspace/virusscanner/src/main/java/pru/Application.java
+/adeel/adeel/workspace/virusscanner/src/main/java/pru/clamav/ClamAVClient.java
+/adeel/adeel/workspace/virusscanner/src/main/java/pru/VirusScanner.java
+/adeel/adeel/workspace/virusscanner/src/main/java/pru/clamav/ClamAVSizeLimitException.java
+/adeel/adeel/workspace/virusscanner/src/main/java/pru/config/ConfigProperties.java
