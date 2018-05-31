@@ -37,6 +37,9 @@ public class VirusScanner {
     @RequestMapping(value="/scan", method=RequestMethod.POST)
     public @ResponseBody String handleFileUpload(@RequestParam("fileToUpload") MultipartFile file) throws IOException{
     	System.out.println("Here I am in Scan Method");
+    	System.out.println("Host Name:"+hostname);
+    	System.out.println("Port:"+port);
+
     	if (!file.isEmpty()) {
         ClamAVClient a = new ClamAVClient(hostname, port, timeout);
         byte[] r = a.scan(file.getInputStream());
