@@ -43,7 +43,7 @@ public class VirusScanner {
     	if (!file.isEmpty()) {
         ClamAVClient a = new ClamAVClient(hostname, port, timeout);
         byte[] r = a.scan(file.getInputStream());
-        return "Everything ok : " + ClamAVClient.isCleanReply(r) + "<br><br> <a href='fileupload.html'>File Upload</a>";
+        return "Everything ok : " + ClamAVClient.isCleanReply(r) + "<br><br>"+r.toString()+"<br><br> <a href='fileupload.html'>File Upload</a>";
       } else throw new IllegalArgumentException("empty file");
     }
 }
