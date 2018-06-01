@@ -1,5 +1,0 @@
-pru/VirusScanner.class
-pru/Application.class
-pru/config/ConfigProperties.class
-pru/clamav/ClamAVClient.class
-pru/clamav/ClamAVSizeLimitException.class
