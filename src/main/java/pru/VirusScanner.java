@@ -1,8 +1,8 @@
 package pru;
 
 import pru.clamav.*;
+
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import java.io.IOException;
 import org.springframework.beans.factory.annotation.Value;
@@ -16,8 +16,8 @@ public class VirusScanner {
     @Value("${clamav.host}")
     private String hostname;
 
-    @Value("${clamav.port}")
-    private int port;
+    //@Value("${clamav.port}")
+    //private int port;
 
     @Value("${clamav.timeout}")
     private int timeout;
@@ -27,8 +27,8 @@ public class VirusScanner {
      */
     @RequestMapping("/")
     public String ping() throws IOException {
-      ClamAVClient a = new ClamAVClient(hostname, port, timeout);
-      return "ClamAV Status: " + a.ping() + "<br>"+"ClamAV Host: " + hostname + "<br>"+"ClamAV Port: " + port;
+      ClamAVClient a = new ClamAVClient(hostname, 3310, timeout);
+      return "ClamAV Status: " + a.ping() + "<br>"+"ClamAV Host: " + hostname + "<br>"+"ClamAV Port: 3310";
     }
 
     /**
@@ -38,10 +38,10 @@ public class VirusScanner {
     public @ResponseBody String handleFileUpload(@RequestParam("fileToUpload") MultipartFile file) throws IOException{
     	System.out.println("Here I am in Scan Method");
     	System.out.println("Host Name:"+hostname);
-    	System.out.println("Port:"+port);
+    	System.out.println("Port: 3310");
 
     	if (!file.isEmpty()) {
-        ClamAVClient a = new ClamAVClient(hostname, port, timeout);
+        ClamAVClient a = new ClamAVClient(hostname, 3310, timeout);
         byte[] r = a.scan(file.getInputStream());
         String s = new String(r);
         return "Everything ok : " + ClamAVClient.isCleanReply(r) + "<br><br>"+s+"<br><br> <a href='fileupload.html'>File Upload</a>";
