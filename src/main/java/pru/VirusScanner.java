@@ -16,18 +16,18 @@ public class VirusScanner {
     @Value("${clamav.host}")
     private String hostname;
 
-    //@Value("${clamav.port}")
-    //private int port;
+    @Value("${clamav.port}")
+    private int port;
 
-  //  @Value("${clamav.timeout}")
-   // private int timeout;
+    @Value("${clamav.timeout}")
+    private int timeout;
 
     /**
      * @return Clamd status.
      */
     @RequestMapping("/")
     public String ping() throws IOException {
-      ClamAVClient a = new ClamAVClient(hostname, 3310, 500);
+      ClamAVClient a = new ClamAVClient(hostname, port, timeout);
       return "ClamAV Status: " + a.ping() + "<br>"+"ClamAV Host: " + hostname + "<br>"+"ClamAV Port: 3310";
     }
 
@@ -38,10 +38,11 @@ public class VirusScanner {
     public @ResponseBody String handleFileUpload(@RequestParam("fileToUpload") MultipartFile file) throws IOException{
     	System.out.println("Here I am in Scan Method");
     	System.out.println("Host Name:"+hostname);
-    	System.out.println("Port: 3310");
+    	System.out.println("Port:"+port);
+    	System.out.println("Timeout:"+timeout);
 
     	if (!file.isEmpty()) {
-        ClamAVClient a = new ClamAVClient(hostname, 3310, 500);
+        ClamAVClient a = new ClamAVClient(hostname, port, timeout);
         byte[] r = a.scan(file.getInputStream());
         String s = new String(r);
         return "Everything ok : " + ClamAVClient.isCleanReply(r) + "<br><br>"+s+"<br><br> <a href='fileupload.html'>File Upload</a>";
