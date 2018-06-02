@@ -19,15 +19,15 @@ public class VirusScanner {
     //@Value("${clamav.port}")
     //private int port;
 
-    @Value("${clamav.timeout}")
-    private int timeout;
+  //  @Value("${clamav.timeout}")
+   // private int timeout;
 
     /**
      * @return Clamd status.
      */
     @RequestMapping("/")
     public String ping() throws IOException {
-      ClamAVClient a = new ClamAVClient(hostname, 3310, timeout);
+      ClamAVClient a = new ClamAVClient(hostname, 3310, 500);
       return "ClamAV Status: " + a.ping() + "<br>"+"ClamAV Host: " + hostname + "<br>"+"ClamAV Port: 3310";
     }
 
@@ -41,7 +41,7 @@ public class VirusScanner {
     	System.out.println("Port: 3310");
 
     	if (!file.isEmpty()) {
-        ClamAVClient a = new ClamAVClient(hostname, 3310, timeout);
+        ClamAVClient a = new ClamAVClient(hostname, 3310, 500);
         byte[] r = a.scan(file.getInputStream());
         String s = new String(r);
         return "Everything ok : " + ClamAVClient.isCleanReply(r) + "<br><br>"+s+"<br><br> <a href='fileupload.html'>File Upload</a>";
